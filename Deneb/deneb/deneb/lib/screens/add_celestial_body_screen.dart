@@ -34,53 +34,45 @@ class _AddCelestialBodyScreenState extends State<AddCelestialBodyScreen> {
       appBar: AppBar(
         title: Text('Add Celestial Body'),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Name:'),
-              TextField(controller: _nameController),
-              SizedBox(height: 16.0),
-              Text('Description:'),
-              TextField(controller: _descriptionController),
-              SizedBox(height: 16.0),
-              Text('Type:'),
-              TextField(controller: _typeController),
-              SizedBox(height: 16.0),
-              Text('Majority Nature:'),
-              TextField(controller: _majorityNatureController),
-              SizedBox(height: 16.0),
-              Text('Size in Km:'),
-              TextField(
-                controller: _sizeInKmController,
-                keyboardType: TextInputType.number,
-              ),
-              SizedBox(height: 16.0),
-              Text('Distance from Earth:'),
-              TextField(
-                controller: _distanceFromEarthController,
-                keyboardType: TextInputType.number,
-              ),
-              SizedBox(height: 16.0),
-              _image == null
-                  ? ElevatedButton(
-                      onPressed: () {
-                        _getImageFromCamera();
-                      },
-                      child: Text('Select Image from Camera'),
-                    )
-                  : Image.file(_image!, height: 100.0),
-              SizedBox(height: 16.0),
-              ElevatedButton(
-                onPressed: () {
-                  _saveCelestialBody();
-                },
-                child: Text('Save Celestial Body'),
-              ),
-            ],
-          ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Name:'),
+            TextField(controller: _nameController),
+            SizedBox(height: 16.0),
+            Text('Description:'),
+            TextField(controller: _descriptionController),
+            SizedBox(height: 16.0),
+            Text('Type:'),
+            TextField(controller: _typeController),
+            SizedBox(height: 16.0),
+            Text('Majority Nature:'),
+            TextField(controller: _majorityNatureController),
+            SizedBox(height: 16.0),
+            Text('Size in Km:'),
+            TextField(controller: _sizeInKmController),
+            SizedBox(height: 16.0),
+            Text('Distance from Earth:'),
+            TextField(controller: _distanceFromEarthController),
+            SizedBox(height: 16.0),
+            _image == null
+                ? ElevatedButton(
+                    onPressed: () {
+                      _getImageFromCamera();
+                    },
+                    child: Text('Select Image from Camera'),
+                  )
+                : Image.file(_image!, height: 100.0),
+            SizedBox(height: 16.0),
+            ElevatedButton(
+              onPressed: () {
+                _saveCelestialBody();
+              },
+              child: Text('Save Celestial Body'),
+            ),
+          ],
         ),
       ),
     );

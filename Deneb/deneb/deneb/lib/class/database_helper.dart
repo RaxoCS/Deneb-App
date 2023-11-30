@@ -95,10 +95,4 @@ class DatabaseHelper {
       );
     });
   }
-
-  Future<int> deleteCelestialBody(int id) async {
-    final db = await database;
-    return await db
-        .delete('celestial_bodies', where: 'id = ?', whereArgs: [id]);
-  }
 }
