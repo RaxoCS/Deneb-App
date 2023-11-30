@@ -2,6 +2,8 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'planetary_system.dart';
 import '../class/celestial_body.dart';
+import 'celestial_type.dart';
+import 'nature_type.dart';
 
 class DatabaseHelper {
   static final DatabaseHelper _instance = DatabaseHelper._internal();
@@ -69,8 +71,18 @@ class DatabaseHelper {
 
   Future<void> insertCelestialBody(CelestialBody celestialBody) async {
     final Database db = await database;
-    await db.insert('celestial_bodies', celestialBody.toMap(),
-        conflictAlgorithm: ConflictAlgorithm.replace);
+    await db.insert('celestial_bodies', {
+      'name': celestialBody.name,
+      'imagePath': celestialBody.imagePath,
+      'description': celestialBody.description,
+      'type':
+          celestialBody.type.toString(), // Convertir el tipo enumerado a cadena
+      'majorityNature': celestialBody.majorityNature
+          .toString(), // Convertir la naturaleza enumerada a cadena
+      'sizeInKm': celestialBody.sizeInKm,
+      'distanceFromEarth': celestialBody.distanceFromEarth,
+      'systemId': celestialBody.systemId,
+    });
   }
 
   Future<List<CelestialBody>> getCelestialBodiesBySystemId(int systemId) async {
@@ -87,8 +99,9 @@ class DatabaseHelper {
         name: maps[index]['name'],
         imagePath: maps[index]['imagePath'],
         description: maps[index]['description'],
-        type: maps[index]['type'],
-        majorityNature: maps[index]['majorityNature'],
+        type: CelestialBody.stringToCelestialType(maps[index]['type']),
+        majorityNature:
+            CelestialBody.stringToNatureType(maps[index]['majorityNature']),
         sizeInKm: maps[index]['sizeInKm'],
         distanceFromEarth: maps[index]['distanceFromEarth'],
         systemId: maps[index]['systemId'],

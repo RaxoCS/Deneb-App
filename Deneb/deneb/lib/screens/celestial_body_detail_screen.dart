@@ -26,8 +26,10 @@ class CelestialBodyDetailScreen extends StatelessWidget {
           _buildImage(),
           SizedBox(height: 16),
           Text('Description: ${celestialBody.description}'),
-          Text('Type: ${celestialBody.type}'),
-          Text('Nature: ${celestialBody.majorityNature}'),
+          Text(
+              'Type: ${CelestialBody.celestialTypeToString(celestialBody.type)}'),
+          Text(
+              'Nature: ${CelestialBody.natureTypeToString(celestialBody.majorityNature)}'),
           Text('Size: ${celestialBody.sizeInKm} km'),
           Text(
               'Distance from Earth: ${celestialBody.distanceFromEarth} million km'),
